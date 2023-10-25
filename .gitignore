@@ -1,0 +1,6 @@
+__pycache__/
+.DS_Store
+models/__pycache__/
+data/MNIST/
+data/FashionMNIST/
+output/
