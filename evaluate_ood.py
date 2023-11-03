@@ -51,9 +51,12 @@ def loop_over_dataloader(model, dataloader):
             ## TODO
             print("kernel_distance, pred")
             # print(kernel_distance.shape, pred.shape)
-            print(kernel_distance[0], pred[0])
+            print(target[0:6])
+            print(target[0:6])
+
 
             accuracy = pred.eq(target)
+            
             accuracies.append(accuracy.cpu().numpy())
 
             scores.append(-kernel_distance.cpu().numpy())
