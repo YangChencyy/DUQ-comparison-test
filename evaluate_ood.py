@@ -51,7 +51,7 @@ def loop_over_dataloader(model, dataloader):
             ## TODO
             print("kernel_distance, pred")
             # print(kernel_distance.shape, pred.shape)
-            print(target[0:6])
+            print(pred)
             print(target[0:6])
 
 
