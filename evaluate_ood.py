@@ -49,12 +49,11 @@ def loop_over_dataloader(model, dataloader):
 
             kernel_distance, pred = output.max(1)
             ## TODO
-            print("kernel_distance, pred")
+            # print("kernel_distance, pred")
             # print(kernel_distance.shape, pred.shape)
-            print(pred[0:6])
-            print(target[0:6])
-
-
+            # print(pred[0:6])
+            # print(target[0:6])
+            ## TODO: ???? why we know labels of OOD samples? What if labels are in different distribution?
             accuracy = pred.eq(target)
             
             accuracies.append(accuracy.cpu().numpy())
@@ -73,13 +72,13 @@ def get_auroc_ood(true_dataset, ood_dataset, model):
     scores, accuracies = loop_over_dataloader(model, dataloader)
 
     accuracy = np.mean(accuracies[: len(true_dataset)]) #/？？？
-    ood_accuracy = np.mean(accuracies[len(true_dataset):])
+    ood_accuracy = 1 - np.mean(accuracies[len(true_dataset):])
     # print("shape:", anomaly_targets.shape, scores.shape)
     # print("score:", scores[0])
-    print("acc:", accuracy, ood_accuracy)
+    # print("acc:", accuracy, ood_accuracy)
     roc_auc = roc_auc_score(anomaly_targets, scores)
 
-    return accuracy, roc_auc
+    return accuracy, ood_accuracy, roc_auc
 
 
 def get_auroc_classification(dataset, model):

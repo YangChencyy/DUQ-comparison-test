@@ -65,9 +65,9 @@ def main():
             print("OOD:", OOD_Dataset[i])
             train_model_cifar(train_set, test_set, OOD_sets[i])
     else:
-        l_gradient_penalties = [0.0]
+        l_gradient_penalties = [0.0, 0.1, 0.3]
         # length_scales = [0.1]
-        length_scales = [0.05, 0.1, 0.3, 0.5, 1.0]
+        length_scales = [0.05, 0.5, 1.0]   # 0.1, 0.3, 
 
         repetition = 1  # Increase for multiple repetitions
         final_model = False  # set true for final model to train on full train set
@@ -94,25 +94,29 @@ def main():
 
                     for i in range(len(OOD_Dataset)):
                         print("OOD: ", OOD_Dataset[i])
-                        accuracy, roc_auc_mnist = get_auroc_ood(test_set, OOD_sets[i], model)
+                        ind_accuracy, ood_accuracy, roc_auc = get_auroc_ood(test_set, OOD_sets[i], model)
 
-                        val_accuracies.append(val_accuracy)
-                        test_accuracies.append(test_accuracy)
+                        # val_accuracies.append(val_accuracy)
+                        # test_accuracies.append(test_accuracy)
 
-                        ood_accuracies.append(accuracy)
+                        # ood_accuracies.append(ood_accuracy)
 
-                        roc_aucs_mnist.append(roc_auc_mnist)
-                    #roc_aucs_notmnist.append(roc_auc_notmnist)
+                        # roc_aucs_mnist.append(roc_auc_mnist)
+                        # roc_aucs_notmnist.append(roc_auc_notmnist)
 
-                        results[f"lgp{l_gradient_penalty}_ls{length_scale}"] = [
-                            (np.mean(val_accuracies), np.std(val_accuracies)),
-                            (np.mean(test_accuracies), np.std(test_accuracies)),
-                            (np.mean(ood_accuracies), np.std(ood_accuracies)),
-                            (np.mean(roc_aucs_mnist), np.std(roc_aucs_mnist)),
-                        ]
-                        print(results[f"lgp{l_gradient_penalty}_ls{length_scale}"])
+                        ## TODO: why take the average instead of maximum here????
+                        print("val_acc, test_acc, ind_acc, ood_acc, auc:")
+                        print(val_accuracy, test_accuracy, ind_accuracy, ood_accuracy, roc_auc)
 
-        print(results)
+                        # results[f"lgp{l_gradient_penalty}_ls{length_scale}"] = [
+                        #     (np.mean(val_accuracies), np.std(val_accuracies)),
+                        #     (np.mean(test_accuracies), np.std(test_accuracies)),
+                        #     (np.mean(ood_accuracies), np.std(ood_accuracies)),
+                        #     (np.mean(roc_aucs_mnist), np.std(roc_aucs_mnist)),
+                        # ]
+                        # print(results[f"lgp{l_gradient_penalty}_ls{length_scale}"])
+
+        # print(results)
 
 
 if __name__ == "__main__":
