@@ -67,7 +67,7 @@ def main():
     else:
         l_gradient_penalties = [0.0]
         # length_scales = [0.1]
-        length_scales = [0.05] #, 0.1, 0.3, 0.5, 1.0]
+        length_scales = [0.05, 0.1, 0.3, 0.5, 1.0]
 
         repetition = 1  # Increase for multiple repetitions
         final_model = False  # set true for final model to train on full train set
