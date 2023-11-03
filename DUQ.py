@@ -1,10 +1,14 @@
 import argparse
+import warnings
+warnings.filterwarnings("ignore")
 
 from train_duq_fm import train_model
 from train_duq_cifar import train_model_cifar
 from evaluate_ood import get_auroc_ood
 from dataset import *
 from models.models import MNIST_Net, Fashion_MNIST_Net, Cifar_10_Net
+
+
 
 
 data_dic = {
@@ -25,7 +29,7 @@ data_model = {
 
 
 def main():
-    parser = argparse.ArgumentParser(description="ODIN parameters")
+    parser = argparse.ArgumentParser(description="DUQ parameters")
 
     # Add a positional argument for the number
     parser.add_argument("InD_Dataset", type=str, help="The name of the InD dataset.")
@@ -44,7 +48,7 @@ def main():
         OOD_Dataset = ['SVHN', 'Imagenet_r', 'Imagenet_c']
     else:
         if args.InD_Dataset == 'MNIST':
-            OOD_Dataset = ['FashionMNIST', 'Cifar_10', 'SVHN', 'Imagenet_r', 'Imagenet_c']
+            OOD_Dataset = ['FashionMNIST'] #, 'Cifar_10', 'SVHN', 'Imagenet_r', 'Imagenet_c']
         elif args.InD_Dataset == 'FashionMNIST':
             OOD_Dataset = ['MNIST', 'Cifar_10', 'SVHN', 'Imagenet_r', 'Imagenet_c']
 
@@ -63,7 +67,7 @@ def main():
     else:
         l_gradient_penalties = [0.0]
         # length_scales = [0.1]
-        length_scales = [0.05, 0.1, 0.3, 0.5, 1.0]
+        length_scales = [0.05] #, 0.1, 0.3, 0.5, 1.0]
 
         repetition = 1  # Increase for multiple repetitions
         final_model = False  # set true for final model to train on full train set
