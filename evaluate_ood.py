@@ -59,6 +59,7 @@ def loop_over_dataloader(model, dataloader):
             accuracies.append(accuracy.cpu().numpy())
 
             scores.append(-kernel_distance.cpu().numpy())
+            print('score:', scores[0:10])
 
     scores = np.concatenate(scores)
     accuracies = np.concatenate(accuracies)

@@ -1,0 +1,4 @@
+/home/rivachen/OOD_Learning_with_GP_boundaries-/Multi_GP/store_data/Cifar_10/*
+/home/rivachen/OOD_learning_GP_models_in_R/data_16/Cifar_10/
+
+cp -u /home/rivachen/OOD_Learning_with_GP_boundaries-/Multi_GP/store_data/Cifar_10/* /home/rivachen/OOD_learning_GP_models_in_R/data_16/Cifar_10/
