@@ -48,7 +48,7 @@ def main():
         OOD_Dataset = ['SVHN', 'Imagenet_r', 'Imagenet_c']
     else:
         if args.InD_Dataset == 'MNIST':
-            OOD_Dataset = ['FashionMNIST']#, 'Cifar_10', 'SVHN', 'Imagenet_r', 'Imagenet_c']
+            OOD_Dataset = ['FashionMNIST', 'Cifar_10', 'SVHN', 'Imagenet_r', 'Imagenet_c']
         elif args.InD_Dataset == 'FashionMNIST':
             OOD_Dataset = ['MNIST', 'Cifar_10', 'SVHN', 'Imagenet_r', 'Imagenet_c']
 
@@ -68,8 +68,8 @@ def main():
         l_gradient_penalties = [0.0, 0.1, 0.3]
         length_scales = [0.05, 0.5, 1.0]   # 0.1, 0.3, 
 
-        l_gradient_penalties = [0.1]
-        length_scales = [0.05]
+        # l_gradient_penalties = [0.1]
+        # length_scales = [0.05]
 
         repetition = 1  # Increase for multiple repetitions
         final_model = False  # set true for final model to train on full train set
