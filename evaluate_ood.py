@@ -74,13 +74,15 @@ def get_auroc_ood(true_dataset, ood_dataset, model):
 
     scores, accuracies = loop_over_dataloader(model, dataloader)
 
-    accuracy = np.mean(accuracies[: len(true_dataset)]) #/？？？
+    accuracy = np.mean(accuracies[:len(true_dataset)]) #/？？？
     # ood_accuracy = 1 - np.mean(accuracies[len(true_dataset):])
     # print("shape:", anomaly_targets.shape, scores.shape)
     # print("score:", scores[0])
     # print("acc:", accuracy, ood_accuracy)
-    q95= np.percentile(accuracies[: len(true_dataset)], 5)
-    ood_accuracy = np.count_nonzero(accuracies[len(true_dataset):] < q95) / len(accuracies[len(true_dataset):])
+    score_InD, score_OOD = scores[: len(true_dataset)], scores[len(true_dataset):]
+    
+    q95= np.percentile(score_InD, 5)
+    ood_accuracy = np.count_nonzero(score_OOD < q95) / len(score_OOD)
     roc_auc = roc_auc_score(anomaly_targets, scores)
     # plt.figure()
 
