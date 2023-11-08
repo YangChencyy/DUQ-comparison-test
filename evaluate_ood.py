@@ -69,7 +69,7 @@ def loop_over_dataloader(model, dataloader):
     return scores, accuracies
 
 
-def get_auroc_ood(true_dataset, ood_dataset, model):
+def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_scale):
     dataloader, anomaly_targets = prepare_ood_datasets(true_dataset, ood_dataset)
 
     scores, accuracies = loop_over_dataloader(model, dataloader)
@@ -79,23 +79,23 @@ def get_auroc_ood(true_dataset, ood_dataset, model):
     # print("shape:", anomaly_targets.shape, scores.shape)
     # print("score:", scores[0])
     # print("acc:", accuracy, ood_accuracy)
-    score_InD, score_OOD = scores[: len(true_dataset)], scores[len(true_dataset):]
+    score_InD, score_OOD = scores[:len(true_dataset)], scores[len(true_dataset):]
     
     q95= np.percentile(score_InD, 5)
     ood_accuracy = np.count_nonzero(score_OOD < q95) / len(score_OOD)
     roc_auc = roc_auc_score(anomaly_targets, scores)
     # plt.figure()
 
-    # # Plot x versus y
-    # plt.scatter(anomaly_targets, scores, marker='o') # You can customize the plot with various arguments
+    # Plot x versus y
+    plt.scatter(anomaly_targets, scores, marker='o') # You can customize the plot with various arguments
 
-    # # Add title and labels
-    # plt.title('Sample Plot')
-    # plt.xlabel('X Axis Label')
-    # plt.ylabel('Y Axis Label')
+    # Add title and labels
+    plt.title('Sample Plot')
+    plt.xlabel('X Axis Label')
+    plt.ylabel('Y Axis Label')
 
-    # # Save the figure
-    # plt.savefig('scatter_plot.png', dpi=300) 
+    # Save the figure
+    plt.savefig('scatter_plot_'+str(l_gradient_penalty)+'_'+str(length_scale)+'.png', dpi=300) 
 
 
     return accuracy, ood_accuracy, roc_auc

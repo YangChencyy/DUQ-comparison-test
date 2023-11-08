@@ -96,7 +96,7 @@ def main():
 
                     for i in range(len(OOD_Dataset)):
                         print("OOD: ", OOD_Dataset[i])
-                        ind_accuracy, ood_accuracy, roc_auc = get_auroc_ood(test_set, OOD_sets[i], model)
+                        ind_accuracy, ood_accuracy, roc_auc = get_auroc_ood(test_set, OOD_sets[i], model, l_gradient_penalty, length_scale)
 
                         # val_accuracies.append(val_accuracy)
                         # test_accuracies.append(test_accuracy)
