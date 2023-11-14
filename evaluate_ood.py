@@ -94,9 +94,14 @@ def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_s
     # Plotting two histograms on the same graph with different transparencies
     plt.hist(scores_normal, alpha=0.5, label='Normal', bins=10)
     plt.hist(scores_anomalies, alpha=0.5, label='Anomalies', bins=10)
+    print(OOD_name)
+    print(min(scores_normal), max(scores_normal))
+    print(min(scores_anomalies), max(scores_anomalies))
+
+
 
     # Setting x-axis range from -1 to 0
-    plt.xlim(-1, 0)
+    # plt.xlim(-1, 0)
 
     # Adding legend
     plt.legend()
