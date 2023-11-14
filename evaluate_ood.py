@@ -95,6 +95,9 @@ def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_s
     plt.hist(scores_normal, alpha=0.5, label='Normal', bins=10)
     plt.hist(scores_anomalies, alpha=0.5, label='Anomalies', bins=10)
 
+    # Setting x-axis range from -1 to 0
+    plt.xlim(-1, 0)
+
     # Adding legend
     plt.legend()
 
