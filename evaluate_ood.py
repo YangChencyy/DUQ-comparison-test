@@ -69,7 +69,7 @@ def loop_over_dataloader(model, dataloader):
     return scores, accuracies
 
 
-def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_scale):
+def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_scale, OOD_name):
     dataloader, anomaly_targets = prepare_ood_datasets(true_dataset, ood_dataset)
 
     scores, accuracies = loop_over_dataloader(model, dataloader)
@@ -104,7 +104,7 @@ def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_s
     plt.ylabel('Frequency')
 
     # Save the figure
-    plt.savefig('scatter_plot_'+ood_dataset+'_'+str(l_gradient_penalty)+'_'+str(length_scale)+'.png', dpi=300) 
+    plt.savefig('scatter_plot_'+OOD_name+'_'+str(l_gradient_penalty)+'_'+str(length_scale)+'.png', dpi=300) 
 
 
     return accuracy, ood_accuracy, roc_auc
