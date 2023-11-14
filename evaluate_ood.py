@@ -86,14 +86,22 @@ def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_s
     roc_auc = roc_auc_score(anomaly_targets, scores)
     # plt.figure()
     accuracy = np.count_nonzero(score_InD > -0.5) / len(score_InD)
+    
+    # Separating the scores based on anomaly_targets
+    scores_normal = scores[anomaly_targets == 0]
+    scores_anomalies = scores[anomaly_targets == 1]
 
-    # Plot x versus y
-    plt.scatter(anomaly_targets, scores, marker='o') # You can customize the plot with various arguments
+    # Plotting two histograms on the same graph with different transparencies
+    plt.hist(scores_normal, alpha=0.5, label='Normal', bins=10)
+    plt.hist(scores_anomalies, alpha=0.5, label='Anomalies', bins=10)
 
-    # Add title and labels
-    plt.title('Sample Plot')
-    plt.xlabel('X Axis Label')
-    plt.ylabel('Y Axis Label')
+    # Adding legend
+    plt.legend()
+
+    # Adding titles and labels
+    plt.title('Histogram of Scores by Target Class')
+    plt.xlabel('Scores')
+    plt.ylabel('Frequency')
 
     # Save the figure
     plt.savefig('scatter_plot_'+str(l_gradient_penalty)+'_'+str(length_scale)+'.png', dpi=300) 
