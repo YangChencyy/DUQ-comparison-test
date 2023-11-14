@@ -65,8 +65,8 @@ def main():
             print("OOD:", OOD_Dataset[i])
             train_model_cifar(train_set, test_set, OOD_sets[i])
     else:
-        l_gradient_penalties = [0.0, 0.1, 0.3]
-        length_scales = [0.05, 0.5, 1.0]   # 0.1, 0.3, 
+        l_gradient_penalties = [0.0] #, 0.1, 0.3]
+        length_scales = [0.05] #, 0.5, 1.0]   # 0.1, 0.3, 
 
         # l_gradient_penalties = [0.1]
         # length_scales = [0.05]

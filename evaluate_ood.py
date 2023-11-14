@@ -86,7 +86,7 @@ def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_s
     roc_auc = roc_auc_score(anomaly_targets, scores)
     # plt.figure()
     accuracy = np.count_nonzero(score_InD > -0.5) / len(score_InD)
-    
+
     # Separating the scores based on anomaly_targets
     scores_normal = scores[anomaly_targets == 0]
     scores_anomalies = scores[anomaly_targets == 1]
@@ -104,7 +104,7 @@ def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_s
     plt.ylabel('Frequency')
 
     # Save the figure
-    plt.savefig('scatter_plot_'+str(l_gradient_penalty)+'_'+str(length_scale)+'.png', dpi=300) 
+    plt.savefig('scatter_plot_'+ood_dataset+'_'+str(l_gradient_penalty)+'_'+str(length_scale)+'.png', dpi=300) 
 
 
     return accuracy, ood_accuracy, roc_auc
