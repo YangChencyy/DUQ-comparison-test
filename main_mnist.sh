@@ -8,7 +8,7 @@
 #SBATCH --mail-user=rivachen@umich.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --partition=standard
-#SBATCH --output=/home/rivachen/DUQ-comparison-test/mnist_results.log
+#SBATCH --output=/home/rivachen/DUQ-comparison-test/mnist_results_95.log
 
 # module purge
 # conda init bash
