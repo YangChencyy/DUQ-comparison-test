@@ -81,11 +81,11 @@ def get_auroc_ood(true_dataset, ood_dataset, model, l_gradient_penalty, length_s
     # print("acc:", accuracy, ood_accuracy)
     score_InD, score_OOD = scores[:len(true_dataset)], scores[len(true_dataset):]
     
-    # q95= np.percentile(score_InD, 5)
-    ood_accuracy = np.count_nonzero(score_OOD > -0.5) / len(score_OOD)
+    q95= np.percentile(score_InD, 5)
+    ood_accuracy = np.count_nonzero(score_OOD > q95) / len(score_OOD)
     roc_auc = roc_auc_score(anomaly_targets, scores)
     # plt.figure()
-    accuracy = np.count_nonzero(score_InD < -0.5) / len(score_InD)
+    accuracy = np.count_nonzero(score_InD < q95) / len(score_InD)
 
     # Separating the scores based on anomaly_targets
     # scores_normal = scores[anomaly_targets == 0]
